@@ -1,13 +1,33 @@
 <template>
 	<div id="app">
 		<h1>vue-drag-it-dude</h1>
-		<input type="checkbox" v-model="ignore" />
-		<p>{{ignore}}</p>
 		<div class="wrapper">
+			<h2>Disable drag?</h2>
+			<input type="checkbox" v-model="ignore" />
+			<p>{{ignore}}</p>
+
 			<drag-it-dude
 				v-for="item, key in inputItems"
 				:key="item.id"
 				:ignoreDrag="ignore"
+				@activated="onActivated(item.id)"
+				@dragging="onDragging(item.id)"
+				@dropped="onDropped(item.id)"
+			>
+				<div class="div">
+					<input type="text" :value="item.text" />
+				</div>
+			</drag-it-dude>
+		</div>
+		<div class="wrapper">
+			<h2>Disable drag?</h2>
+			<input type="checkbox" v-model="ignore" />
+			<p>{{shouldIgnore()}}</p>
+
+			<drag-it-dude
+				v-for="item, key in inputItems"
+				:key="item.id"
+				:ignoreDrag="shouldIgnore"
 				@activated="onActivated(item.id)"
 				@dragging="onDragging(item.id)"
 				@dropped="onDropped(item.id)"
@@ -52,6 +72,9 @@ export default {
 			setTimeout(() => {
 				this.inputItems[key].text = "Just move me!";
 			}, 3000);
+		},
+		shouldIgnore() {
+			return this.ignore;
 		}
 	}
 };
@@ -90,5 +113,19 @@ input {
 	border: 1px solid #ccc;
 	font-size: 16px;
 	text-align: center;
+}
+
+input[type="checkbox"] {
+	width: auto;
+	height: auto;
+	display: inline-block;
+}
+
+p {
+	display: inline-block;
+}
+
+h2 {
+	display: inline-block;
 }
 </style>

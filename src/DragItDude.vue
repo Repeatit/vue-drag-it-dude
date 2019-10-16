@@ -32,7 +32,7 @@ export default {
 			default: 0
 		},
 		ignoreDrag: {
-			type: Boolean,
+			type: [Boolean, Function],
 			default: false
 		}
 	},
@@ -116,7 +116,10 @@ export default {
 			this.top = newTop;
 		},
 		hang(e) {
-			if (this.ignoreDrag) return;
+			if (typeof this.ignoreDrag === "function" && this.ignoreDrag())
+				return;
+			else if (typeof this.ignoreDrag === "boolean" && this.ignoreDrag)
+				return;
 			this.$emit("activated");
 			this.parent.width =
 				this.parentWidth || this.elem.parentNode.offsetWidth;
