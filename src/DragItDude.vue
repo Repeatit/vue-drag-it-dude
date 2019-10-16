@@ -116,7 +116,7 @@ export default {
 			this.top = newTop;
 		},
 		hang(e) {
-			if (typeof this.ignoreDrag === "function" && this.ignoreDrag())
+			if (typeof this.ignoreDrag === "function" && this.ignoreDrag(e))
 				return;
 			else if (typeof this.ignoreDrag === "boolean" && this.ignoreDrag)
 				return;
