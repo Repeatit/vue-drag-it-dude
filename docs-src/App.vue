@@ -13,6 +13,7 @@
 				@activated="onActivated(item.id)"
 				@dragging="onDragging(item.id)"
 				@dropped="onDropped(item.id)"
+				@added="added($event, item.id)"
 			>
 				<div class="div">
 					<input type="text" :value="item.text" />
@@ -31,6 +32,7 @@
 				@activated="onActivated(item.id)"
 				@dragging="onDragging(item.id)"
 				@dropped="onDropped(item.id)"
+				@added="added($event, item.id)"
 			>
 				<div class="div">
 					<input type="text" :value="item.text" />
@@ -80,6 +82,9 @@ export default {
 		},
 		shouldIgnore() {
 			return this.ignore;
+		},
+		added(event, id) {
+			console.log("ADDED!", event, id)
 		}
 	}
 };
