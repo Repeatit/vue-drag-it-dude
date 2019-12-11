@@ -149,7 +149,7 @@ export default {
 			}
 		},
 		drop(ignoreEmit) {
-			if (ignoreEmit === true) this.$emit("dropped");
+			if (ignoreEmit !== true) this.$emit("dropped");
 
 			document.body.style.overflow = null;
 			this.elem.parentElement.removeEventListener(
