@@ -149,16 +149,24 @@ export default {
 			}
 		},
 		drop() {
-			this.$emit("dropped");
 			document.body.style.overflow = null;
-			this.elem.parentElement.removeEventListener(
-				"mousemove",
-				this.elementMove,
-				false
-			);
-			this.elem.removeEventListener("touchmove", this.elementMove, false);
-			this.elem.parentElement.onmouseup = null;
-			this.elem.ontouchend = null;
+			this.$emit("dropped");
+
+			this.$parent.$children.forEach(child => {
+				child.elem.parentElement.removeEventListener(
+					"mousemove",
+					child.elementMove,
+					false
+				);
+
+				child.elem.removeEventListener(
+					"touchmove",
+					child.elementMove,
+					false
+				);
+				child.elem.parentElement.onmouseup = null;
+				child.elem.ontouchend = null;
+			});
 		}
 	},
 	mounted() {

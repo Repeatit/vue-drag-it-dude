@@ -7,7 +7,7 @@
 			<p>{{ignore}}</p>
 
 			<drag-it-dude
-				v-for="item, key in inputItems"
+				v-for="item in inputItems"
 				:key="item.id"
 				:ignoreDrag="ignore"
 				@activated="onActivated(item.id)"
@@ -25,7 +25,7 @@
 			<p>{{shouldIgnore()}}</p>
 
 			<drag-it-dude
-				v-for="item, key in inputItems"
+				v-for="item in inputItems"
 				:key="item.id"
 				:ignoreDrag="shouldIgnore"
 				@activated="onActivated(item.id)"
@@ -55,7 +55,12 @@ export default {
 					text: "Just move me!",
 					isActive: false,
 					id: 0
-				}
+				},
+				{
+					text: "Just move me 2!",
+					isActive: false,
+					id: 1
+				},
 			],
 			ignore: false
 		};
