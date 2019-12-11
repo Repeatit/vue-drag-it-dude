@@ -148,8 +148,9 @@ export default {
 				this.elem.addEventListener("touchmove", this.elementMove);
 			}
 		},
-		drop() {
-			this.$emit("dropped");
+		drop(ignoreEmit) {
+			if (ignoreEmit === true) this.$emit("dropped");
+
 			document.body.style.overflow = null;
 			this.elem.parentElement.removeEventListener(
 				"mousemove",
